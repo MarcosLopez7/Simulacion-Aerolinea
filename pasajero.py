@@ -1,7 +1,12 @@
 class Pasajero:
 
-    def __init__(self, id, identificacion, equipaje):
-        self.id = id
-        self.identificacion = identificacion
+    equi_perdido = False
+    id = 1
+
+    def __init__(self, equipaje, vuelo_ida, vuelo_vuelta, discapacidad):
+        self.id = Pasajero.id
         self.equipaje = equipaje
-        self.equi_perdido = False
+        self.vuelo_ida = vuelo_ida
+        self.vuelo_vuelta = vuelo_vuelta
+        self.discapacidad = discapacidad
+        Pasajero.id += 1

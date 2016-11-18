@@ -1,23 +1,23 @@
 class Congruencial:
 
     numeros = []
-    a = 0
-    c = 0
-    m = 0
+    a = 21
+    c = 471
+    m = 10000
 
     def __init__(self, x0):
         self.x0 = x0
         self.xn = x0
-        self.numeros.append(self.x0)
+        Congruencial.numeros.append(self.x0)
 
     def genera(self):
-        numero = (self.a * self.xn + self.c) % self.m
+        numero = (Congruencial.a * self.xn + Congruencial.c) % Congruencial.m
 
         if numero in self.numeros:
             print("Error: El generador acaba de cumplir su ciclo")
             self.xn = numero
             return numero
         else:
-            self.numeros.append(numero)
+            Congruencial.numeros.append(numero)
             self.xn = numero
             return numero
