@@ -16,10 +16,15 @@ class Aerolinea:
         with open('data.json') as data_file:
             data = json.load(data_file)
             self.random = Congruencial(gmtime().tm_sec)
+            self.vuelos = data['vuelos']
+            self.aviones = data['aviones']
 
     def compras(self):
         compra = Compra()
 
         for i in range(1, 366 * 24):
-            compra.compra(self.pasajeros, self.random.genera() % 100, self.vuelos)
+            compra.compra(self.pasajeros, self.random.genera() % 2, self.vuelos, i)
+            print(i)
+
+        print(len(self.pasajeros))
 

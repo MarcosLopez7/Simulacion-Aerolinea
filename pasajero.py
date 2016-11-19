@@ -10,3 +10,7 @@ class Pasajero:
         self.vuelo_vuelta = vuelo_vuelta
         self.discapacidad = discapacidad
         Pasajero.id += 1
+
+    def __str__(self):
+        if self.vuelo_vuelta != None:
+            return "pasajero {0} {1} {2}".format(self.id, self.vuelo_ida.)
