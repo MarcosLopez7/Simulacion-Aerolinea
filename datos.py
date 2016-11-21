@@ -36,23 +36,28 @@ class Datos:
             }
         ]}
 
+        avion = 1
+
         for i in range(-20, 450):
+
             objecto1 = {
                 'id': id,
                 'avion': {
                     'tipo': '787 Dreamliner',
                     'pasajeros': 243,
                     'disponibilidad': 243,
-                    'velocidad': 900
+                    'velocidad': 900,
+                    'id': avion
                 },
                 'fecha': datetime.strftime(datetime.now() + timedelta(days=i), '%Y-%m-%d'),
                 'origen': 'Mexico',
                 'destino': 'Francia',
-                'hora_salida': '800',
-                'hora_llegada': '2000'
+                'hora_salida': '2345',
+                'hora_llegada': '1100'
             }
 
             id += 1
+            avion *= -1
 
             objecto2 = {
                 'id': id,
@@ -60,13 +65,14 @@ class Datos:
                     'tipo': '787 Dreamliner',
                     'pasajeros': 243,
                     'disponibilidad': 243,
-                    'velocidad': 900
+                    'velocidad': 900,
+                    'id': avion
                 },
                 'fecha': datetime.strftime(datetime.now() + timedelta(days=i), '%Y-%m-%d'),
                 'origen': 'Francia',
                 'destino': 'Mexico',
-                'hora_salida': '2000',
-                'hora_llegada': '800'
+                'hora_salida': '1500',
+                'hora_llegada': '400'
             }
 
             datos['vuelos'].append(objecto1)
