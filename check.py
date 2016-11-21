@@ -9,7 +9,6 @@ class CheckIn:
 
 	def colaCheckIn(self,pasajeros,vuelos,num_pasajeros):
 		generador = Congruencial(200)
-		atendidos = 0
 		tiempo_total = 0
 		hora_4_t = 0 
 		hora_5_t = 0
@@ -26,8 +25,9 @@ class CheckIn:
 			hora_5 = 0
 			hora_6 = 0 
 			hora_7 = 0
+			atendidos = 0
 			hora_may_8 = 0
-			print("------------%d-----------------"%i)
+			print("------------%d-----------------"%j)
 			print("Numero de pasajeros en cola %d" %num_pasajeros)
 			#numero de pasajeros
 			'''numero = (generador.genera() % 100)
@@ -43,18 +43,18 @@ class CheckIn:
 				pasajeros_por_atender = 5
 			else:
 				pasajeros_por_atender = 6'''
-			#hora en que llegan entre 4 y 7
+			#hora en que llegan entre 20 a 0
 			hora = int(datetime.strftime(datetime.now() + timedelta(hours=j), '%H'))
-			if hora > 4:
+			if hora > 20:
 				prob_solicitudes = 0.2
 				hora_4 = 1
-			elif hora > 5:
+			elif hora > 21:
 				prob_solicitudes = 0.3
 				hora_5 = 1
-			elif hora > 6:
+			elif hora > 22:
 				prob_solicitudes = 0.35
 				hora_6 = 1
-			elif hora > 7:
+			elif hora > 23:
 				prob_solicitudes = 0.1
 				hora_7 = 1
 			else:
