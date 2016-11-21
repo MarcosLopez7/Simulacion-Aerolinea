@@ -52,20 +52,22 @@ class Aerolinea:
             random = (self.random.genera() % 100) + 1
 
             if prob_solicitudes > random:
-                if 10 > random:
-                    compra.compra(self.pasajeros, 5, self.vuelos, i)
-                elif 25 > random:
+                if 100 > random:
+                    compra.compra(self.pasajeros, 20, self.vuelos, i)
+                elif 90 > random:
+                    compra.compra(self.pasajeros, 16, self.vuelos, i)
+                elif 60 > random:
+                    compra.compra(self.pasajeros, 12, self.vuelos, i)
+                elif 30 > random:
+                    compra.compra(self.pasajeros, 10, self.vuelos, i)
+                elif 15 > random:
                     compra.compra(self.pasajeros, 4, self.vuelos, i)
-                elif 50 > random:
-                    compra.compra(self.pasajeros, 3, self.vuelos, i)
-                elif 75 > random:
-                    compra.compra(self.pasajeros, 2, self.vuelos, i)
                 else:
-                    compra.compra(self.pasajeros, 1, self.vuelos, i)
+                    compra.compra(self.pasajeros, 2, self.vuelos, i)
 
-            #print(i)
+            print(i)
 
-        #print(len(self.pasajeros))
+        print(len(self.pasajeros))
 
     def procesos(self):
 

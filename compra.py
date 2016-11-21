@@ -64,7 +64,7 @@ class Compra:
                             discapacidad = True
                         pasajero = Pasajero(self.random.genera() % 30, vuelo, None, discapacidad)
                         pasajeros.append(pasajero)
-                        mes = datetime.strftime(datetime.now() + timedelta(days=vuelo_rand, hours=h), '%Y-%m-%d')
+                        mes = datetime.strftime(datetime.now() + timedelta(days=vuelo_rand, hours=h), '%m')
                         if mes == '12' or mes == '08' or mes == '06' or mes == '07':
                             self.ventas += self.pasaje * 2
                         else:
@@ -91,7 +91,7 @@ class Compra:
                             discapacidad = True
                         pasajero = Pasajero(self.random.genera() % 30, vuelo, vuelo_vuelta, discapacidad)
                         pasajeros.append(pasajero)
-                        mes = datetime.strftime(datetime.now() + timedelta(days=vuelo_rand, hours=h), '%Y-%m-%d')
+                        mes = datetime.strftime(datetime.now() + timedelta(days=vuelo_rand, hours=h), '%m')
                         if mes == '12' or mes == '08' or mes == '06' or mes == '07':
                             self.ventas += self.pasaje * 4
                         else:
@@ -128,7 +128,7 @@ class Compra:
                             discapacidad = True
                         pasajero = Pasajero(self.random.genera() % 30, vuelo, None, discapacidad)
                         pasajeros.append(pasajero)
-                        mes = datetime.strftime(datetime.now() + timedelta(days=vuelo_rand, hours=h), '%Y-%m-%d')
+                        mes = datetime.strftime(datetime.now() + timedelta(days=vuelo_rand, hours=h), '%m')
                         if mes == '12' or mes == '08' or mes == '06' or mes == '07':
                             self.ventas += self.pasaje * 2
                         else:
@@ -156,7 +156,7 @@ class Compra:
                             discapacidad = True
                         pasajero = Pasajero(self.random.genera() % 30, vuelo, vuelo_vuelta, discapacidad)
                         pasajeros.append(pasajero)
-                        mes = datetime.strftime(datetime.now() + timedelta(days=vuelo_rand, hours=h), '%Y-%m-%d')
+                        mes = datetime.strftime(datetime.now() + timedelta(days=vuelo_rand, hours=h), '%m')
                         if mes == '12' or mes == '08' or mes == '06' or mes == '07':
                             self.ventas += self.pasaje * 4
                         else:
@@ -192,7 +192,7 @@ class Compra:
                             discapacidad = True
                         pasajero = Pasajero(self.random.genera() % 30, vuelo, None, discapacidad)
                         pasajeros.append(pasajero)
-                        mes = datetime.strftime(datetime.now() + timedelta(days=vuelo_rand, hours=h), '%Y-%m-%d')
+                        mes = datetime.strftime(datetime.now() + timedelta(days=vuelo_rand, hours=h), '%m')
                         if mes == '12' or mes == '08' or mes == '06' or mes == '07':
                             self.ventas += self.pasaje * 2
                         else:
@@ -220,6 +220,7 @@ class Compra:
                             discapacidad = True
                         pasajero = Pasajero(self.random.genera() % 30, vuelo, vuelo_vuelta, discapacidad)
                         pasajeros.append(pasajero)
+                        mes = datetime.strftime(datetime.now() + timedelta(days=vuelo_rand, hours=h), '%m')
                         if mes == '12' or mes == '08' or mes == '06' or mes == '07':
                             self.ventas += self.pasaje * 4
                         else:
