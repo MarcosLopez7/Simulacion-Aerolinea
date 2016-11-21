@@ -220,6 +220,10 @@ class Compra:
                             discapacidad = True
                         pasajero = Pasajero(self.random.genera() % 30, vuelo, vuelo_vuelta, discapacidad)
                         pasajeros.append(pasajero)
+                        if mes == '12' or mes == '08' or mes == '06' or mes == '07':
+                            self.ventas += self.pasaje * 4
+                        else:
+                            self.ventas += self.pasaje * 2
                     break
                 else:
                     print("Si estas funcionando?")

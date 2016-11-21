@@ -16,17 +16,23 @@ class Datos:
             {
                 "tipo": "787 Dreamliner",
                 "pasajeros": 243,
-                "velocidad": 900
+                "velocidad": 900,
+                "mantenimiento": False,
+                "enuso": True
             },
             {
                 "tipo": "B-737-800",
                 "pasajeros": 160,
-                "velocidad": 840
+                "velocidad": 840,
+                "mantenimiento": False,
+                "enuso": False
             },
             {
                 "tipo": "EMB-170",
                 "pasajeros": 76,
-                "velocidad": 830
+                "velocidad": 830,
+                "mantenimiento": False,
+                "enuso": False
             }
         ]}
 

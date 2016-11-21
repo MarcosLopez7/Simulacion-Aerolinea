@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from time import gmtime
 from compra import Compra
 from avion import Avion
+from falla import Falla
 from generador import Congruencial
 
 class Aerolinea:
@@ -64,5 +65,58 @@ class Aerolinea:
 
             #print(i)
 
-        print(len(self.pasajeros))
+        #print(len(self.pasajeros))
+
+    def procesos(self):
+
+        falla_mexico = Falla()
+        falla_francia = Falla()
+
+
+        for i in range(1, 366 * 24):
+            hora = int(datetime.strftime(datetime.now() + timedelta(hours=i), '%H'))
+
+
+            if hora == 6:
+                rand_falla_mecanica = (self.random.genera() % 100)
+
+                if 1 > rand_falla_mecanica:
+                    falla_mexico.falla = True
+                    falla_mexico.mecanica()
+
+            if hora == 18:
+                rand_falla_mecanica = (self.random.genera() % 100)
+
+                if 1 > rand_falla_mecanica:
+                    falla_francia.falla = True
+                    falla_francia.mecanica()
+
+            if hora == 7 and not falla_mexico.matenimiento:
+                rand_clima = (self.random.genera() % 100)
+
+                if 5 > rand_clima:
+                    falla_mexico.mal_clima = True
+                    falla_mexico.climatico()
+            elif hora == 7 and falla_mexico.matenimiento:
+                fecha = datetime.strftime(datetime.now() + timedelta(hours=i), '%Y-%m-%d')
+                for i in range(0, len(self.vuelos), 2):
+                    if fecha == self.vuelos[i]['fecha']:
+                        if self.aviones[1]['mantenimiento'] and self.aviones[1]['enuso']:
+                            self.vuelos[i]['avion']
+
+
+            if hora == 19:
+                rand_clima = (self.random.genera() % 100)
+
+                if 5 > rand_clima:
+                    falla_francia.mal_clima = True
+                    falla_francia.climatico()
+
+
+
+
+
+
+
+
 
