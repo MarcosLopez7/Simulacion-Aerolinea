@@ -5,7 +5,7 @@ def main():
     aerolinea = Aerolinea()
     checkin = CheckIn()
     aerolinea.compras()
-    checkin.makeCheckIn(aerolinea.pasajeros)
+    checkin.makeCheckInMexico(aerolinea.pasajeros,aerolinea.vuelos)
 
 if __name__ == "__main__":
     main()
