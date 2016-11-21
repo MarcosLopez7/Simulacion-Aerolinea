@@ -7,6 +7,9 @@ class Datos:
         self.archivo = None
 
     def datos(self):
+
+        id = 1
+
         self.archivo = open('data.json', 'w')
 
         datos = {'vuelos': [], 'aviones': [
@@ -29,6 +32,7 @@ class Datos:
 
         for i in range(-20, 450):
             objecto1 = {
+                'id': id,
                 'avion': {
                     'tipo': '787 Dreamliner',
                     'pasajeros': 243,
@@ -58,5 +62,7 @@ class Datos:
 
             datos['vuelos'].append(objecto1)
             datos['vuelos'].append(objecto2)
+
+            id += 1
 
         self.archivo.write(json.dumps(datos))
