@@ -29,9 +29,9 @@ class Aerolinea:
             if hora > 5:
                 prob_solicitudes = 1
             elif hora > 7:
-                prob_solicitudes = 3
-            elif hora > 9:
                 prob_solicitudes = 10
+            elif hora > 9:
+                prob_solicitudes = 40
             elif hora > 11:
                 prob_solicitudes = 55
             elif hora > 18:
@@ -41,7 +41,7 @@ class Aerolinea:
             elif hora > 22:
                 prob_solicitudes = 30
             else:
-                prob_solicitudes = 5
+                prob_solicitudes = 20
 
             mes = datetime.strftime(datetime.now() + timedelta(hours=i), '%%m')
 
@@ -51,7 +51,13 @@ class Aerolinea:
             random = (self.random.genera() % 100) + 1
 
             if prob_solicitudes > random:
-                if 50 > random:
+                if 10 > random:
+                    compra.compra(self.pasajeros, 5, self.vuelos, i)
+                elif 25 > random:
+                    compra.compra(self.pasajeros, 4, self.vuelos, i)
+                elif 50 > random:
+                    compra.compra(self.pasajeros, 3, self.vuelos, i)
+                elif 75 > random:
                     compra.compra(self.pasajeros, 2, self.vuelos, i)
                 else:
                     compra.compra(self.pasajeros, 1, self.vuelos, i)
