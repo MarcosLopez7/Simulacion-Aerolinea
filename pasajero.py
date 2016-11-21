@@ -13,4 +13,6 @@ class Pasajero:
 
     def __str__(self):
         if self.vuelo_vuelta != None:
-            return "pasajero {0} {1} {2}".format(self.id, self.vuelo_ida.)
+            return "pasajero {0}, vuelo ida: {1} vuelo vuelta: {2}".format(self.id, self.vuelo_ida['origen'], self.vuelo_vuelta['origen'])
+        else:
+            return "pasajero {0}, vuelo ida: {1}".format(self.id, self.vuelo_ida['origen'])

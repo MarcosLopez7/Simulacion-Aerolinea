@@ -41,7 +41,7 @@ class Compra:
                     vuelo = vuelos[i]
                     break
 
-            if vuelo['avion']['disponibilidad'] - personas >= 0:
+            if vuelo != None and vuelo['avion']['disponibilidad'] - personas >= 0:
                 vuelo['avion']['disponibilidad'] -= personas
                 if not redondo:
                     for i in range(personas):
