@@ -1,6 +1,8 @@
 from avion import Avion
 from pasajero import Pasajero
 from generador import Congruencial
+from datetime import datetime, timedelta
+from time import gmtime
 class CheckIn:
 	def __init__(self):
 		pasajeros = 0
@@ -10,47 +12,68 @@ class CheckIn:
 		atendidos = 0
 		tiempo_total = 0
 		for i in range(0,num_pasajeros):
-			numero = generador.genera()
-			numero = (numero/(generador.m/100))/100
-			numero = numero * 1.0
-			print("El numero generado de pasajeros es %.2f" %numero)
-			if numero < 0.30 and numero >= 0.0:
+			numero = (generador.genera() % 100)
+			if numero < 30 and numero >= 0:
 				pasajeros_por_atender = 1
-			elif numero < 0.45 and numero >= 0.3:
+			elif numero < 45 and numero >= 30:
 				pasajeros_por_atender = 2
-			elif numero < 0.66 and numero >= 0.45:
+			elif numero < 66 and numero >= 45:
 				pasajeros_por_atender = 3	
-			elif numero < 0.77 and numero >= 0.66:
+			elif numero < 77 and numero >= 66:
 				pasajeros_por_atender = 4
-			elif numero < 0.9 and numero >= 0.77:
+			elif numero < 90 and numero >= 77:
 				pasajeros_por_atender = 5
 			else:
 				pasajeros_por_atender = 6
 			#Tiempo de atencion por pasajero
-			numero_t = generador.genera()
-			numero_t = (numero_t/(generador.m/100))/100
-			if numero_t < 0.3 and numero_t >= 0.0:
+			numero_t = generador.genera()%100
+			if numero_t < 30 and numero_t >= 0:
 				 tiempo_atencion = 5
-			elif numero_t < 0.45 and numero_t >= 0.3:
+			elif numero_t < 45 and numero_t >= 30:
 				 tiempo_atencion = 10
-			elif numero_t < 0.66 and numero_t >= 0.45:
+			elif numero_t < 66 and numero_t >= 45:
 				 tiempo_atencion = 7
-			elif numero_t < 0.77 and numero_t >= 0.66:
+			elif numero_t < 77 and numero_t >= 66:
 				 tiempo_atencion = 13
-			elif numero_t < 0.9 and numero_t >= 0.77:
+			elif numero_t < 90 and numero_t >= 77:
 				 tiempo_atencion = 3
 			else:
 				tiempo_atencion = 1
+			#Tomando en cuenta la hora
+			hora = int(datetime.strftime(datetime.now() + timedelta(hours=i), '%H'))
+			if hora == 4:
+				prob_solicitudes = 20/100
+			elif hora == 5:
+				prob_solicitudes = 30/100
+			elif hora == 6:
+				prob_solicitudes = 35/100
+			elif hora == 7:
+				prob_solicitudes = 10/100
+			else:
+				prob_solicitudes = 5/100
+			'''	
+			if hora == 4:
+           		prob_solicitudes = 20/100
+            elif hora == 5:
+            	prob_solicitudes = 30/100
+            elif hora == 6:
+            	prob_solicitudes = 35/100
+            elif hora == 7:
+            	prob_solicitudes = 10/100
+            else:
+            	prob_solicitudes = 5/100
+            '''
+            pasajeros_por_atender = ((pasajeros_por_atender * prob_solicitudes) * 100)
 			#Comparaciones
-			print("Atendiendo %d en %f tiempo" %(pasajeros_por_atender,tiempo_atencion))
+			print("Atendiendo %d en %d tiempo" %(pasajeros_por_atender,tiempo_atencion))
 			if atendidos < num_pasajeros:
 				atendidos += pasajeros_por_atender
 				tiempo_total += (pasajeros_por_atender*tiempo_atencion)
 			else:
 				print ("Faltaron de atender %d " %((atendidos + pasajeros_por_atender)-num_pasajeros))
 
-		print ("El promedio de pasajeros es %f " %(atendidos/num_pasajeros))
-		print ("El tiempo_total es %f" %tiempo_total)
+		print ("El promedio de pasajeros es %d " %(atendidos/num_pasajeros))
+		print ("El tiempo_total es %d" %tiempo_total)
 		print ("Se atendieron %d pasajeros" %atendidos)
 
 	def makeCheckInMexico(self,pasajeros,vuelos):
@@ -58,7 +81,6 @@ class CheckIn:
 		for j in range(40,60,2):#len(vuelos)):
 			num_pasajeros = 0
 			for i in range(0,len(pasajeros)):
-			#print ("%d %s %s" %(i, pasajeros[i].vuelo_ida['fecha'],vuelos[100]['fecha']))#pasajeros[i].vuelo_ida['fecha']))
 				if (pasajeros[i].vuelo_ida['fecha'] == vuelos[j]['fecha']):
 					num_pasajeros += 1
 			print(num_pasajeros)
