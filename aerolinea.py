@@ -78,36 +78,40 @@ class Aerolinea:
         for i in range(1, 366 * 24):
             hora = int(datetime.strftime(datetime.now() + timedelta(hours=i), '%H'))
 
-
-            if hora == 6:
+            if hora == 22:
                 rand_falla_mecanica = (self.random.genera() % 100)
 
                 if 1 > rand_falla_mecanica:
                     falla_mexico.falla = True
                     falla_mexico.mecanica()
 
-            if hora == 18:
+            if hora == 13:
                 rand_falla_mecanica = (self.random.genera() % 100)
 
                 if 1 > rand_falla_mecanica:
                     falla_francia.falla = True
                     falla_francia.mecanica()
 
-            if hora == 7 and not falla_mexico.matenimiento:
+            if hora == 23 and not falla_mexico.matenimiento:
                 rand_clima = (self.random.genera() % 100)
 
                 if 5 > rand_clima:
                     falla_mexico.mal_clima = True
                     falla_mexico.climatico()
-            elif hora == 7 and falla_mexico.matenimiento:
+            elif hora == 23 and falla_mexico.matenimiento:
                 fecha = datetime.strftime(datetime.now() + timedelta(hours=i), '%Y-%m-%d')
+                indice = 0
                 for i in range(0, len(self.vuelos), 2):
                     if fecha == self.vuelos[i]['fecha']:
-                        if self.aviones[1]['mantenimiento'] and self.aviones[1]['enuso']:
-                            self.vuelos[i]['avion']
+                        indice = i
+                        break
+
+                if falla_mexico.matenimiento:
+                    self.vuelos[indice]['cancelacion'] = True
+                    falla_mexico.cancelacion()
 
 
-            if hora == 19:
+            if hora == 14:
                 rand_clima = (self.random.genera() % 100)
 
                 if 5 > rand_clima:
