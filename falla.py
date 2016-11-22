@@ -14,7 +14,12 @@ class Falla:
         self.congelamiento = False
 
     def mecanica(self):
-        return (self.random.genera() % 10) + 2
+        random = self.random.genera() % 100
+
+        if 1 > random:
+            return (self.random.genera() % 10) + 2
+        else:
+            return 0
 
 
     def climatico(self, h, indice):
