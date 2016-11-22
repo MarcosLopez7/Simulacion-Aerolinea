@@ -11,15 +11,14 @@ class Falla:
         self.matenimiento = False
 
     def mecanica(self):
-        congelamiento_rand = self.random.genera() % 100
-
-        if 30 > congelamiento_rand:
-            self.tiempo = (self.random.genera() % 3) + 1
-        else:
-            self.tiempo = (self.random.genera() % 3) + 3
+        self.tiempo = (self.random.genera() % 10) + 2
+        if self.tiempo > 7:
             self.matenimiento = True
 
 
     def climatico(self):
         nada = True
 
+
+    def cancelacion(self):
+        nada = True
