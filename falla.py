@@ -32,7 +32,7 @@ class Falla:
         random = self.random.genera() % 100
 
         if probabilidad_mal_clima > random:
-            self.tiempo = (self.random.genera() % 8) + 1
+            tiempo = (self.random.genera() % 8) + 1
             self.mal_clima = True
 
         if indice % 2 == 1:
@@ -42,7 +42,7 @@ class Falla:
                 if proba_congelamiento > random:
                     self.congelamiento = True
 
-        return self.tiempo
+        return tiempo
 
 
     def cancelacion(self, vuelos, pasajeros, indice, h):
