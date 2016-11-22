@@ -16,7 +16,7 @@ class Abordaje:
 			if pasajeros[i].discapacidad == True:
 				dis += 1
 		print("Hay %d discapacitados" %dis)
-		generador = Congruencial(20)
+		generador = Congruencial(vuelo['id'])
 		rand = generador.genera()%100
 		if rand < 50 and rand >= 0:
 			pasajeros_por_minuto = 20
@@ -26,7 +26,8 @@ class Abordaje:
 			pasajeros_por_minuto = 5
 		elif rand <= 100  and rand >= 95:
 			pasajeros_por_minuto = 1
-
+		if dis > 0 :
+			pasajeros_por_minuto -= 5
 		print("Tiempo total en abordaje %f minutos" %(len(pasajeros)/pasajeros_por_minuto))
 	def repostajeCombustible(self,vuelo):
 		print("Repostando vuelo %s "%(vuelo['id']))

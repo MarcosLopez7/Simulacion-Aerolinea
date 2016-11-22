@@ -5,6 +5,7 @@ from generador import Congruencial
 from datetime import datetime, timedelta
 from time import gmtime
 from abordaje import Abordaje
+from shuttle import Shuttle
 class CheckIn:
 	def __init__(self):
 		pasajeros = 0
@@ -110,14 +111,15 @@ class CheckIn:
 		self.sobrepeso(perdidos,pasajeros)
 		
 		print ("Atendidos a las 5 horas antes del vuelo: %d" %hora_4_t)
-		print ("Atendidos a las 4 %f" %(int(hora_5_t/num_pasajeros_iniciales)))
+		print ("Atendidos a las 4 %d" %(int(hora_5_t/num_pasajeros_iniciales)))
 		print ("Atendidos a las 3 %d" %hora_6_t)
 		print ("Atendidos a las 2 %d" %hora_7_t)
 		print ("Atendidos a las 1 o menos: %d" %hora_may_8_t)
 
 	def makeCheckInMexico(self,pasajeros,vuelos):
+		shut = Shuttle()
 		print ("CheckIn de Mexico a Francia")
-		for j in range(40,50,2):#len(vuelos)):
+		for j in range(44,60,2):#len(vuelos)):
 			num_pasajeros = 0
 			pasajeros_en_vuelo = []
 			for i in range(0,len(pasajeros)):
@@ -130,11 +132,12 @@ class CheckIn:
 				self.colaCheckIn(pasajeros_en_vuelo,vuelos,num_pasajeros)
 			else:
 				print ("Para la fecha %s no hay pasajeros" %(vuelos[j]['fecha']))
-			self.makeBoarding(pasajeros_en_vuelo,vuelos[j])
+			self.makeBoarding(pasajeros_en_vuelo,vuelos[j])	
+			shut.cargarShuttle(vuelos[j],pasajeros_en_vuelo)
 
 	def makeCheckInFrancia(self,pasajeros,vuelos):
 		print ("CheckIn de Francia a Mexico")
-		for j in range(41,50,2):#len(vuelos)):
+		for j in range(45,50,2):#len(vuelos)):
 			pasajeros_en_vuelo = []
 			num_pasajeros = 0
 			for i in range(0,len(pasajeros)):

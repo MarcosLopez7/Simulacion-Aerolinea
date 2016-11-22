@@ -62,5 +62,5 @@ class Despegue:
 					aviones_en_cola_tax = 0
 		#Tomando en cuenta 2 minutos por cada avion en cola de aterrizar y 3 por cada despegue
 			print("Hay que esperar a %d aviones un tiempo de %d que aterricen" %(aviones_en_cola_at,aviones_en_cola_at*2))
-			print("Hay que esperar a %d aviones un tiempo de %d que despeguen" %(aviones_en_cola_tax,aviones_en_cola_tax*3))
+			print("Hay que esperar a %d aviones un tiempo de %d que roden" %(aviones_en_cola_tax,aviones_en_cola_tax*3))
 			print("El tiempo total de espera para el vuelo %d en pista es: %d" %(vuelo['id'],(aviones_en_cola_at*2)+(aviones_en_cola_tax*3)))
