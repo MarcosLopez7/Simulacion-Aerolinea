@@ -75,8 +75,8 @@ class Aerolinea:
         falla_mexico = Falla()
         falla_francia = Falla()
 
-        indice_vuelo_mex = 42
-        indice_vuelo_fra = 43
+        indice_vuelo_mex = 44
+        indice_vuelo_fra = 45
         fecha = datetime.strftime(datetime.now(), '%Y-%m-%d')
         avion_mex = self.vuelos[indice_vuelo_mex]
         avion_fra = self.vuelos[indice_vuelo_fra]
@@ -93,7 +93,7 @@ class Aerolinea:
 
             hora = int(datetime.strftime(datetime.now() + timedelta(hours=i), '%H'))
 
-            if hora == 22 and not self.vuelos[indice_vuelo_fra]['avion']['cancelado']:
+            if hora == 22 and not self.vuelos[indice_vuelo_mex - 1]['avion']['cancelado']:
                 rand_falla_mecanica = (self.random.genera() % 100)
 
                 if 1 > rand_falla_mecanica:
