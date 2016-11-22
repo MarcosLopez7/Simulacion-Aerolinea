@@ -42,7 +42,7 @@ class Falla:
                 if proba_congelamiento > random:
                     self.congelamiento = True
 
-        return tiempo
+        return self.mal_clima
 
 
     def cancelacion(self, vuelos, pasajeros, indice, h):

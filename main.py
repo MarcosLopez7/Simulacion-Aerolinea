@@ -8,6 +8,7 @@ def main():
 
     aerolinea.compras()
     checkin.makeCheckInMexico(aerolinea.pasajeros,aerolinea.vuelos)
+    checkin.makeCheckInFrancia(aerolinea.pasajeros,aerolinea.vuelos)
 
 if __name__ == "__main__":
     main()

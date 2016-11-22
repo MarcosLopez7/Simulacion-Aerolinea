@@ -26,10 +26,11 @@ class Abordaje:
 			pasajeros_por_minuto = 5
 		elif rand <= 100  and rand >= 95:
 			pasajeros_por_minuto = 1
+		tiempo_t = int(len(pasajeros)/pasajeros_por_minuto)
 		if dis > 0 :
-			pasajeros_por_minuto -= 2
-		print("Tiempo total en abordaje %d minutos" %(int(len(pasajeros)/pasajeros_por_minuto)))
-		return (int(len(pasajeros)/pasajeros_por_minuto))
+			tiempo_t -= 2
+		print("Tiempo total en abordaje %d minutos" %(tiempo_t))
+		return tiempo_t
 	def repostajeCombustible(self,vuelo):
 		#print("Repostando vuelo %s "%(vuelo['id']))
 		generador = Congruencial(vuelo['id'])
@@ -101,5 +102,5 @@ class Abordaje:
 		elif rand <= 100 and rand >= 95:
 			tiempo_carga = 60
 
-		print("Tiempo total de descongelamiento %d minutos" % (tiempo_carga)
+		print("Tiempo total de descongelamiento %d minutos" % (tiempo_carga))
 		return  (tiempo_carga)

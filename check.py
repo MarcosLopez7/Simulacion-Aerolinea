@@ -7,6 +7,7 @@ from time import gmtime
 from abordaje import Abordaje
 from shuttle import Shuttle
 from depegue import Despegue
+from falla import Falla
 
 class CheckIn:
 	def __init__(self):
@@ -122,14 +123,24 @@ class CheckIn:
 		shut = Shuttle()
 		abor = Abordaje()
 		des = Despegue()
+		fallas = Falla()
 		abordaje_total = 0
+		comb_total = 0
 		serv_total = 0
 		shuttle_total = 0
 		descon_total = 0
 		tax_at_total = 0
 		mantto_total = 0
+		abordaje_avg = 0
+		serv_avg = 0
+		shuttle_avg = 0
+		descon_avg = 0
+		tax_at_avg = 0
+		mantto_avg = 0
+		comb_avg = 0
+		num_pasajeros_avg = 0
 		print ("CheckIn de Mexico a Francia")
-		for j in range(44,60,2):#len(vuelos)):
+		for j in range(44,len(vuelos),2):#len(vuelos)):
 			num_pasajeros = 0
 			pasajeros_en_vuelo = []
 			for i in range(0,len(pasajeros)):
@@ -144,12 +155,19 @@ class CheckIn:
 			else:
 				print ("Para la fecha %s no hay pasajeros" %(vuelos[j]['fecha']))
 			comb_total = abor.repostajeCombustible(vuelos[j])
-			#descon_total = abor.descongelamiento(vuelos[j])
+			comb_avg += comb_total
+			descon_total = abor.descongelamiento(vuelos[j])
+			descon_avg += descon_total
 			abordaje_total = self.makeBoarding(pasajeros_en_vuelo,vuelos[j])
+			abordaje_avg += abordaje_total
 			tax_at_total = 	des.taxing(vuelos[j])
+			tax_at_avg += tax_at_total
 			serv_total = abor.servicioDeAeromozas(vuelos[j],pasajeros_en_vuelo)
+			serv_avg += serv_total
 			shuttle_total = shut.cargarShuttle(vuelos[j],pasajeros_en_vuelo)
-
+			shuttle_avg += shuttle_total
+			num_pasajeros_avg += num_pasajeros
+			#falla_meca = fallas.mecanica()
 			print("-----------------------------")
 			print("Vuelo %d" %(j))
 			print("-----------------------------")
@@ -157,17 +175,52 @@ class CheckIn:
 			print("Mes: %s"%(vuelos[j]['fecha'])[5:7])
 			print("Boletos comprados: %d"%num_pasajeros)
 			#print("Tiempo de Check In: %d minutos"%checkin_total)
+			#if falla_meca == 0:
+		#		print("Hay falla mecanica")
+			#if mal_clima == True:
+	#			print("Hay mal clima")
+			#print("Vuelo cancelado? %d"%cancelado)
+			#print("Tiempo atrasado"%tiempo_atraso)
 			print("Tiempo de Repostaje de Combustible %d"%comb_total)
-			#print("Tiempo de Descongelamiento: %d" %descon_total)
+			print("Tiempo de Descongelamiento: %d" %descon_total)
 			print("Tiempo de Abordaje: %d minutos"%abordaje_total)
 			#print("Tiempo de Mantenimiento: %d minutos"%mantto_total)
 			print("Tiempo de espera a despegar: %d minutos"%tax_at_total)
 			print("Tiempo de Servicio: %d minutos"%serv_total)
 			print("Tiempo de Shuttle: %d minutos" %shuttle_total)
 
+		print("-----Fin-----")
+		print("Promedio Boletos comprados: %d"%(int(num_pasajeros_avg)/len(vuelos)))
+		print("Promedio de tiempo de Repostaje de Combustible %d"%(int(comb_avg)/len(vuelos)))
+		print("Promedio de tiempo de Descongelamiento: %d" %(int(descon_avg)/len(vuelos)))
+		print("Promedio de tiempo de Abordaje: %d minutos"%(int(abordaje_avg)/len(vuelos)))
+		#print("Tiempo de Mantenimiento: %d minutos"%mantto_total)
+		print("Promedio de tiempo de espera a despegar: %d minutos"%(int(tax_at_avg)/len(vuelos)))
+		print("Promedio de tiempo de Servicio: %d minutos"%(int(serv_avg)/len(vuelos)))
+		print("Promedio de tiempo de Shuttle: %d minutos" %(int(shuttle_avg)/len(vuelos)))
+
 	def makeCheckInFrancia(self,pasajeros,vuelos):
+		shut = Shuttle()
+		abor = Abordaje()
+		des = Despegue()
+		fallas = Falla()
+		abordaje_total = 0
+		comb_total = 0
+		serv_total = 0
+		shuttle_total = 0
+		descon_total = 0
+		tax_at_total = 0
+		mantto_total = 0
+		abordaje_avg = 0
+		serv_avg = 0
+		shuttle_avg = 0
+		descon_avg = 0
+		tax_at_avg = 0
+		mantto_avg = 0
+		comb_avg = 0
+		num_pasajeros_avg = 0
 		print ("CheckIn de Francia a Mexico")
-		for j in range(45,50,2):#len(vuelos)):
+		for j in range(45,len(vuelos),2):#len(vuelos)):
 			pasajeros_en_vuelo = []
 			num_pasajeros = 0
 			for i in range(0,len(pasajeros)):
@@ -180,8 +233,50 @@ class CheckIn:
 				self.colaCheckIn(pasajeros_en_vuelo,vuelos,num_pasajeros)
 			else:
 				print ("Para la fecha %s no hay pasajeros" %(vuelos[j]['fecha']))
-			self.makeBoarding(pasajeros_en_vuelo,vuelos[j])
-
+			comb_total = abor.repostajeCombustible(vuelos[j])
+			comb_avg += comb_total
+			descon_total = abor.descongelamiento(vuelos[j])
+			descon_avg += descon_total
+			abordaje_total = self.makeBoarding(pasajeros_en_vuelo,vuelos[j])
+			abordaje_avg += abordaje_total
+			tax_at_total = 	des.taxing(vuelos[j])
+			tax_at_avg += tax_at_total
+			serv_total = abor.servicioDeAeromozas(vuelos[j],pasajeros_en_vuelo)
+			serv_avg += serv_total
+			shuttle_total = shut.cargarShuttle(vuelos[j],pasajeros_en_vuelo)
+			shuttle_avg += shuttle_total
+			num_pasajeros_avg += num_pasajeros
+			print("-----------------------------")
+			print("Vuelo %d" %(j))
+			print("-----------------------------")
+			print("Fecha: %s"%vuelos[j]['fecha'])
+			print("Mes: %s"%(vuelos[j]['fecha'])[5:7])
+			print("Origen: %s"%vuelos[j]['origen'])
+			print("Destino: %s"%vuelos[j]['destino'])
+			print("Boletos comprados: %d"%num_pasajeros)
+			#print("Tiempo de Check In: %d minutos"%checkin_total)
+			if falla_meca == 0:
+				print("Hay falla mecanica")
+			if mal_clima == True:
+				print("Hay mal clima")
+			print("Vuelo cancelado? %d"%cancelado)
+			print("Tiempo atrasado"%tiempo_atraso)
+			print("Tiempo de Repostaje de Combustible %d"%comb_total)
+			print("Tiempo de Descongelamiento: %d" %descon_total)
+			print("Tiempo de Abordaje: %d minutos"%abordaje_total)
+			#print("Tiempo de Mantenimiento: %d minutos"%mantto_total)
+			print("Tiempo de espera a despegar: %d minutos"%tax_at_total)
+			print("Tiempo de Servicio: %d minutos"%serv_total)
+			print("Tiempo de Shuttle: %d minutos" %shuttle_total)
+		print("-----Fin-----")
+		print("Promedio Boletos comprados: %d"%(int(num_pasajeros_avg)/len(vuelos)))
+		print("Promedio de tiempo de Repostaje de Combustible %d"%(int(comb_avg)/len(vuelos)))
+		print("Promedio de tiempo de Descongelamiento: %d" %(int(descon_avg)/len(vuelos)))
+		print("Promedio de tiempo de Abordaje: %d minutos"%(int(abordaje_avg)/len(vuelos)))
+		#print("Tiempo de Mantenimiento: %d minutos"%mantto_total)
+		print("Promedio de tiempo de espera a despegar: %d minutos"%(int(tax_at_avg)/len(vuelos)))
+		print("Promedio de tiempo de Servicio: %d minutos"%(int(serv_avg)/len(vuelos)))
+		print("Promedio de tiempo de Shuttle: %d minutos" %(int(shuttle_avg)/len(vuelos)))
 	def makeBoarding(self,pasajeros,vuelo):
 		abordaje = Abordaje()
 		return abordaje.abordar(pasajeros,vuelo)

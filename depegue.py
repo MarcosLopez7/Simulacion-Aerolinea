@@ -14,7 +14,7 @@ class Despegue:
 		aviones_en_cola_tax = 0
 		generador = Congruencial(vuelo['id']*3)
 		for i in range(1,13):
-			mes = (vuelo['fecha'])[6:8]#datetime.now() + timedelta(hours=i), '%%m')
+			mes = (vuelo['fecha'])[5:7]#datetime.now() + timedelta(hours=i), '%%m')
 			#print("Mes: %s"%mes)
 			#print("Fecha: %s"%vuelo['fecha'])
 			if mes == '12' or mes == '08' or mes == '06' or mes == '07':
