@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from time import gmtime
 class Shuttle:
 	def cargarShuttle(self,vuelo,pasajeros):
-		print("Mis pasajeros %d"%len(pasajeros))
+		#print("Mis pasajeros %d"%len(pasajeros))
 		#Ver cuantos aviones llegaron
 		generador = Congruencial(20)
 		rand = generador.genera()%100
@@ -42,9 +42,9 @@ class Shuttle:
 		total = int(total * 0.2) #20 % toma shuttle
 		print("Pasajeros que necesitan shuttle: %d" %(total))
 		viajes_por_hacer = (total / 10) #10 pasajeros maximo por camioneta
-		print ("Se haran %d viajes de llenos" %viajes_por_hacer)
+		print ("Se haran %d viajes llenos" %viajes_por_hacer)
 		remaining = total % 10 
-		print ("Remanente: %d" %remaining)
+		#print ("Remanente: %d" %remaining)
 		rem = False
 		if remaining > 0:
 			viajes_por_hacer_t = viajes_por_hacer + 1
@@ -60,6 +60,7 @@ class Shuttle:
 				tiempo = self.viaje(remaining,gmtime().tm_sec)
 			tiempo_t += tiempo
 		print("Tiempo total de viajes %d" %tiempo_t)
+		return tiempo_t
 
 	def viaje(self,pasajeros,rand_n):
 		generador = Congruencial(rand_n)
@@ -70,7 +71,7 @@ class Shuttle:
 		frec_10m = 0
 		for i in range(1,pasajeros+1):
 			rand_4 = (generador.genera())%100
-			print("Numero Rand %d"%rand_4)
+			#print("Numero Rand %d"%rand_4)
 			if rand_4 < 40 and rand_4 >=0:
 				frec_3m += 1
 			elif rand_4 < 70 and rand_4 >= 40:
