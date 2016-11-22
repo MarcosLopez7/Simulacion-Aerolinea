@@ -189,7 +189,7 @@ class CheckIn:
 			print("Tiempo de Servicio: %d minutos"%serv_total)
 			print("Tiempo de Shuttle: %d minutos" %shuttle_total)
 
-		print("-----Fin-----")
+		print("-----Fin Mexico-----")
 		print("Promedio Boletos comprados: %d"%(int(num_pasajeros_avg)/len(vuelos)))
 		print("Promedio de tiempo de Repostaje de Combustible %d"%(int(comb_avg)/len(vuelos)))
 		print("Promedio de tiempo de Descongelamiento: %d" %(int(descon_avg)/len(vuelos)))
@@ -255,12 +255,12 @@ class CheckIn:
 			print("Destino: %s"%vuelos[j]['destino'])
 			print("Boletos comprados: %d"%num_pasajeros)
 			#print("Tiempo de Check In: %d minutos"%checkin_total)
-			if falla_meca == 0:
-				print("Hay falla mecanica")
-			if mal_clima == True:
-				print("Hay mal clima")
-			print("Vuelo cancelado? %d"%cancelado)
-			print("Tiempo atrasado"%tiempo_atraso)
+			#if falla_meca == 0:
+			#	print("Hay falla mecanica")
+			#if mal_clima == True:
+			#	print("Hay mal clima")
+			#print("Vuelo cancelado? %d"%cancelado)
+			#print("Tiempo atrasado"%tiempo_atraso)
 			print("Tiempo de Repostaje de Combustible %d"%comb_total)
 			print("Tiempo de Descongelamiento: %d" %descon_total)
 			print("Tiempo de Abordaje: %d minutos"%abordaje_total)
@@ -268,7 +268,7 @@ class CheckIn:
 			print("Tiempo de espera a despegar: %d minutos"%tax_at_total)
 			print("Tiempo de Servicio: %d minutos"%serv_total)
 			print("Tiempo de Shuttle: %d minutos" %shuttle_total)
-		print("-----Fin-----")
+		print("-----Fin Francia-----")
 		print("Promedio Boletos comprados: %d"%(int(num_pasajeros_avg)/len(vuelos)))
 		print("Promedio de tiempo de Repostaje de Combustible %d"%(int(comb_avg)/len(vuelos)))
 		print("Promedio de tiempo de Descongelamiento: %d" %(int(descon_avg)/len(vuelos)))

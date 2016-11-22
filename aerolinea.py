@@ -55,17 +55,17 @@ class Aerolinea:
 
             if prob_solicitudes > random:
                 if 100 > random:
-                    compra.compra(self.pasajeros, 20, self.vuelos, i)
+                    compra.compra(self.pasajeros, 40, self.vuelos, i)
                 elif 90 > random:
-                    compra.compra(self.pasajeros, 16, self.vuelos, i)
+                    compra.compra(self.pasajeros, 36, self.vuelos, i)
                 elif 60 > random:
-                    compra.compra(self.pasajeros, 12, self.vuelos, i)
+                    compra.compra(self.pasajeros, 24, self.vuelos, i)
                 elif 30 > random:
-                    compra.compra(self.pasajeros, 10, self.vuelos, i)
+                    compra.compra(self.pasajeros, 20, self.vuelos, i)
                 elif 15 > random:
-                    compra.compra(self.pasajeros, 4, self.vuelos, i)
+                    compra.compra(self.pasajeros, 8, self.vuelos, i)
                 else:
-                    compra.compra(self.pasajeros, 2, self.vuelos, i)
+                    compra.compra(self.pasajeros, 5, self.vuelos, i)
 
 
         print(len(self.pasajeros))
