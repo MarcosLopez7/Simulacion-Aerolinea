@@ -6,6 +6,7 @@ from avion import Avion
 from falla import Falla
 from generador import Congruencial
 
+
 class Aerolinea:
 
     dinero_ganado = 0
