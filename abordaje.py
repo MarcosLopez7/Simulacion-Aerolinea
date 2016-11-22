@@ -10,7 +10,7 @@ class Abordaje:
 
 	def abordar(self,pasajeros,vuelo):
 		#Considerar pasajeros con discapacidad
-		print("Bienvenidos al vuelo de la fecha %s" %vuelo['fecha'])
+		#print("Bienvenidos al vuelo de la fecha %s" %vuelo['fecha'])
 		dis = 0
 		for i in range(0,len(pasajeros)):
 			if pasajeros[i].discapacidad == True:
@@ -27,11 +27,11 @@ class Abordaje:
 		elif rand <= 100  and rand >= 95:
 			pasajeros_por_minuto = 1
 		if dis > 0 :
-			pasajeros_por_minuto -= 5
-		print("Tiempo total en abordaje %f minutos" %(len(pasajeros)/pasajeros_por_minuto))
-		return (len(pasajeros)/pasajeros_por_minuto)
+			pasajeros_por_minuto -= 2
+		print("Tiempo total en abordaje %d minutos" %(int(len(pasajeros)/pasajeros_por_minuto)))
+		return (int(len(pasajeros)/pasajeros_por_minuto))
 	def repostajeCombustible(self,vuelo):
-		print("Repostando vuelo %s "%(vuelo['id']))
+		#print("Repostando vuelo %s "%(vuelo['id']))
 		generador = Congruencial(vuelo['id'])
 		rand_2 = generador.genera()%100
 		if rand_2 < 65 and rand_2 >= 0:
@@ -44,7 +44,7 @@ class Abordaje:
 			aviones_en_cola = 3
 		elif rand_2 <= 100   and rand_2 >=98:
 			aviones_en_cola = 4
-		print("Hay %d aviones en cola" %(aviones_en_cola))
+		#print("Hay %d aviones en cola" %(aviones_en_cola))
 		rand = generador.genera()%100
 		if rand < 30 and rand >= 0:
 			tiempo_carga = 3
@@ -61,10 +61,10 @@ class Abordaje:
 		return tiempo_repostaje
 
 	def servicioDeAeromozas(self,vuelo,num):
-		print("Sirviendo pasajeros del vuelo %s "%(vuelo['id']))
+		#print("Sirviendo pasajeros del vuelo %s "%(vuelo['id']))
 		generador = Congruencial(vuelo['id'])
 		tiempo_de_servicio_t = 0 
-		for i in range(0,num):
+		for i in range(0,len(num)):
 			rand = generador.genera()%100
 			if rand < 65 and rand >= 0:
 				tiempo_de_servicio = 1
@@ -81,7 +81,7 @@ class Abordaje:
 		return tiempo_de_servicio_t
 
 	def descongelamiento(self, vuelo):
-		print("Repostando vuelo %s " % (vuelo['id']))
+		#print("Repostando vuelo %s " % (vuelo['id']))
 		generador = Congruencial(vuelo['id'])
 		rand = generador.genera() % 100
 		if rand < 30 and rand >= 0:
