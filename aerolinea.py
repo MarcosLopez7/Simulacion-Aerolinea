@@ -1,4 +1,4 @@
-import json
+import json, math
 from datetime import datetime, timedelta
 from time import gmtime
 from compra import Compra
@@ -75,32 +75,51 @@ class Aerolinea:
         falla_mexico = Falla()
         falla_francia = Falla()
 
-
+        indice_vuelo_mex = 42
+        indice_vuelo_fra = 43
+        fecha = datetime.strftime(datetime.now(), '%Y-%m-%d')
+        avion_mex = self.vuelos[indice_vuelo_mex]
+        avion_fra = self.vuelos[indice_vuelo_fra]
 
         for i in range(1, 366 * 24):
+
+            fecha_i = datetime.strftime(datetime.now() + timedelta(hours=i), '%Y-%m-%d')
+
+            if fecha != fecha_i:
+                indice_vuelo_mex += 2
+                indice_vuelo_fra += 2
+                avion_mex = self.vuelos[indice_vuelo_mex]['avion']['id']
+                avion_fra = self.vuelos[indice_vuelo_fra]['avion']['id']
+
             hora = int(datetime.strftime(datetime.now() + timedelta(hours=i), '%H'))
 
-            if hora == 22:
+            if hora == 22 and not self.vuelos[indice_vuelo_fra]['avion']['cancelado']:
                 rand_falla_mecanica = (self.random.genera() % 100)
 
                 if 1 > rand_falla_mecanica:
                     falla_mexico.falla = True
                     falla_mexico.mecanica()
 
-            if hora == 13:
+            if hora == 13 and (self.vuelos[indice_vuelo_fra - 3]['t_retraso'] / 60 < 2):
+                rand_falla_mecanica = (self.random.genera() % 100)
+
+                if 1 > rand_falla_mecanica:
+                    falla_francia.falla = True
+                    falla_francia.mecanica()
+            elif hora == 13 + math.ceil(self.vuelos[indice_vuelo_fra - 3]['t_retraso'] / 60) - 2:
                 rand_falla_mecanica = (self.random.genera() % 100)
 
                 if 1 > rand_falla_mecanica:
                     falla_francia.falla = True
                     falla_francia.mecanica()
 
-            if hora == 23 and not falla_mexico.matenimiento:
+            if hora == 23 and not falla_mexico.matenimiento and not self.vuelos[indice_vuelo_fra]['avion']['cancelado']:
                 rand_clima = (self.random.genera() % 100)
 
                 if 5 > rand_clima:
                     falla_mexico.mal_clima = True
                     falla_mexico.climatico()
-            elif hora == 23 and falla_mexico.matenimiento:
+            elif hora == 23 and falla_mexico.matenimiento and not self.vuelos[indice_vuelo_fra]['avion']['cancelado']:
                 fecha = datetime.strftime(datetime.now() + timedelta(hours=i), '%Y-%m-%d')
                 indice = 0
                 for i in range(0, len(self.vuelos), 2):

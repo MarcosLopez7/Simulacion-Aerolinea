@@ -53,7 +53,11 @@ class Datos:
                 'origen': 'Mexico',
                 'destino': 'Francia',
                 'hora_salida': '2345',
-                'hora_llegada': '1100'
+                'hora_llegada': '1100',
+                'hora_real_s': '2345',
+                'hora_real_l': '1100',
+                't_retraso': 0,
+                'cancelado': False
             }
 
             id += 1
@@ -72,7 +76,11 @@ class Datos:
                 'origen': 'Francia',
                 'destino': 'Mexico',
                 'hora_salida': '1500',
-                'hora_llegada': '400'
+                'hora_llegada': '400',
+                'hora_real_s': '1500',
+                'hora_real_l': '400',
+                't_retraso': 0,
+                'cancelado': False
             }
 
             datos['vuelos'].append(objecto1)
