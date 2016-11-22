@@ -70,8 +70,8 @@ class Compra:
                         else:
                             self.ventas += self.pasaje
                 break
-            else:
-                print("Si estas funcionando?")
+            #else:
+            #    print("Si estas funcionando?")
 
         if redondo:
              while True:
@@ -97,8 +97,8 @@ class Compra:
                         else:
                             self.ventas += self.pasaje * 2
                     break
-                else:
-                    print("Si estas funcionando?")
+                #else:
+                #    print("Si estas funcionando?")
 
     def presencial(self, vuelos, pasajeros, h):
 
@@ -134,8 +134,8 @@ class Compra:
                         else:
                             self.ventas += self.pasaje
                 break
-            else:
-                print("Si estas funcionando?")
+            #else:
+            #    print("Si estas funcionando?")
 
         if redondo:
             while True:
@@ -162,8 +162,8 @@ class Compra:
                         else:
                             self.ventas += self.pasaje * 3
                     break
-                else:
-                    print("Si estas funcionando?")
+                #else:
+                #    print("Si estas funcionando?")
 
 
     def agencia(self, vuelos, pasajeros, h):
@@ -198,8 +198,8 @@ class Compra:
                         else:
                             self.ventas += self.pasaje
                 break
-            else:
-                print("Si estas funcionando?")
+            #else:
+            #    print("Si estas funcionando?")
 
         if redondo:
             while True:
@@ -226,6 +226,6 @@ class Compra:
                         else:
                             self.ventas += self.pasaje * 2
                     break
-                else:
-                    print("Si estas funcionando?")
+                #else:
+                #    print("Si estas funcionando?")
 
