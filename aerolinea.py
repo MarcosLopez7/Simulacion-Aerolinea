@@ -75,6 +75,7 @@ class Aerolinea:
         falla_francia = Falla()
 
 
+
         for i in range(1, 366 * 24):
             hora = int(datetime.strftime(datetime.now() + timedelta(hours=i), '%H'))
 
