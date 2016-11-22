@@ -67,7 +67,6 @@ class Aerolinea:
                 else:
                     compra.compra(self.pasajeros, 2, self.vuelos, i)
 
-           # print(i)
 
         print(len(self.pasajeros))
 

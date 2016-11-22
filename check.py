@@ -8,7 +8,16 @@ from abordaje import Abordaje
 class CheckIn:
 	def __init__(self):
 		pasajeros = 0
-
+	def sobrepeso(self,num,pasajeros):
+		peso_excedente = 0
+		costo_pk_exc = 100
+		generador = Congruencial(100)
+		for i in range(0,num+1):
+			rand = generador.genera()%len(pasajeros)
+			if pasajeros[rand].equipaje > 25:
+				peso_excedente += pasajeros[rand].equipaje - 25
+		print("Se obtuvieron %d kilos, representan $%d" %(peso_excedente,peso_excedente*costo_pk_exc))
+		
 	def colaCheckIn(self,pasajeros,vuelos,num_pasajeros):
 		generador = Congruencial(200)
 		tiempo_total = 0
@@ -21,7 +30,6 @@ class CheckIn:
 		pasajeros_por_atender = 0
 		num_pasajeros = 100
 		num_pasajeros_iniciales = num_pasajeros
-		#print("num_pasajeros en proceso %d"%num_pasajeros)
 		while num_pasajeros > 0:
 			hora_4 = 0 
 			hora_5 = 0
@@ -32,7 +40,7 @@ class CheckIn:
 			#print("------------%d-----------------"%i)
 			#print("Numero de pasajeros en cola %d" %num_pasajeros)
 			rand = int(datetime.strftime(datetime.now(), '%H'))
-			hora = generador.genera()*(rand*(i*2)) % 100
+			hora = ((generador.genera())*(rand*(i*2))) % 100
 			if hora < 20 and hora >= 0:
 				prob_solicitudes = 0.2
 				hora_4 = 1
@@ -45,7 +53,7 @@ class CheckIn:
 			elif hora < 95 and hora >= 85:
 				prob_solicitudes = 0.1
 				hora_7 = 1
-			else:
+			elif hora <= 100 and hora >= 95:
 				prob_solicitudes = 0.05
 				hora_may_8 = 1
 			#Tiempo de atencion por pasajero
@@ -60,7 +68,7 @@ class CheckIn:
 				 tiempo_atencion = 13
 			elif numero_t < 90 and numero_t >= 77:
 				 tiempo_atencion = 3
-			else:
+			elif numero_t <= 100 and numero_t >= 90:
 				tiempo_atencion = 1
 			#Tomando en cuenta la hora
 			#print("Resultado de la probabilidad %d" %(int(num_pasajeros * prob_solicitudes)))
@@ -69,7 +77,6 @@ class CheckIn:
 			#print("num_pasajeros despues de atender %d"%num_pasajeros)
 			i+=1
 			#Comparaciones
-			#200 usd por pasajero de perdida
 			#print("Atendiendo %d en %d tiempo" %(pasajeros_por_atender,tiempo_atencion))
 			if atendidos < num_pasajeros:
 				if num_pasajeros > 0 and pasajeros_por_atender < 1:
@@ -97,10 +104,10 @@ class CheckIn:
 			#print ("[%d]: El promedio de llegada pasajeros es %f " %(i,(atendidos/num_pasajeros_iniciales)))
 		#print ("Se atendieron %d pasajeros" %atendidos)
 		perdidos = int(num_pasajeros_iniciales*0.10)
-		print ("Se perdio el equipaje de %d pasajeros el costo es: %f" %(perdidos,perdidos*200)) #200 USD por cada pasajero
+		#print (" %d pasajeros tendran sobrepeso: %f" %(perdidos,perdidos*200)) #200 USD por cada pasajero
 		print ("El tiempo_total es %d" %tiempo_total)
 		
-		
+		self.sobrepeso(perdidos,pasajeros)
 		
 		print ("Atendidos a las 5 horas antes del vuelo: %d" %hora_4_t)
 		print ("Atendidos a las 4 %f" %(int(hora_5_t/num_pasajeros_iniciales)))
@@ -112,31 +119,39 @@ class CheckIn:
 		print ("CheckIn de Mexico a Francia")
 		for j in range(40,50,2):#len(vuelos)):
 			num_pasajeros = 0
+			pasajeros_en_vuelo = []
 			for i in range(0,len(pasajeros)):
 				if (pasajeros[i].vuelo_ida['fecha'] == vuelos[j]['fecha']):
 					num_pasajeros += 1
+					pasajeros_en_vuelo.append(pasajeros[i])
 			#print(num_pasajeros)
 			print("Vuelo %d" %(j))
 			if num_pasajeros > 0:
-				self.colaCheckIn(pasajeros,vuelos,num_pasajeros)
+				self.colaCheckIn(pasajeros_en_vuelo,vuelos,num_pasajeros)
 			else:
 				print ("Para la fecha %s no hay pasajeros" %(vuelos[j]['fecha']))
-			self.makeBoarding(pasajeros,vuelos[j])
+			self.makeBoarding(pasajeros_en_vuelo,vuelos[j])
+
 	def makeCheckInFrancia(self,pasajeros,vuelos):
 		print ("CheckIn de Francia a Mexico")
 		for j in range(41,50,2):#len(vuelos)):
+			pasajeros_en_vuelo = []
 			num_pasajeros = 0
 			for i in range(0,len(pasajeros)):
 				if (pasajeros[i].vuelo_ida['fecha'] == vuelos[j]['fecha']):
 					num_pasajeros += 1
+					pasajeros_en_vuelo.append(pasajeros[i])
 			#print(num_pasajeros)
 			print("Vuelo %d" %(j))
 			if num_pasajeros > 0:
-				self.colaCheckIn(pasajeros,vuelos,num_pasajeros)
+				self.colaCheckIn(pasajeros_en_vuelo,vuelos,num_pasajeros)
 			else:
 				print ("Para la fecha %s no hay pasajeros" %(vuelos[j]['fecha']))
+			self.makeBoarding(pasajeros_en_vuelo,vuelos[j])
+
 	def makeBoarding(self,pasajeros,vuelo):
 		abordaje = Abordaje()
 		abordaje.abordar(pasajeros,vuelo)
+		abordaje.repostajeCombustible(vuelo)
 
 		
