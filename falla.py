@@ -14,9 +14,7 @@ class Falla:
         self.congelamiento = False
 
     def mecanica(self):
-        self.tiempo = (self.random.genera() % 10) + 2
-        if self.tiempo > 7:
-            self.matenimiento = True
+        return (self.random.genera() % 10) + 2
 
 
     def climatico(self, h, indice):
@@ -38,6 +36,8 @@ class Falla:
                 random = self.random.genera() % 100
                 if proba_congelamiento > random:
                     self.congelamiento = True
+
+        return self.tiempo
 
 
     def cancelacion(self, vuelos, pasajeros, indice, h):

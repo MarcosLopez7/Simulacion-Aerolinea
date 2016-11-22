@@ -101,5 +101,5 @@ class Abordaje:
 		elif rand <= 100 and rand >= 95:
 			tiempo_carga = 60
 
-		print("Tiempo total de descongelamiento %d minutos" % (tiempo_carga * (aviones_en_cola + 1)))
-		return  (tiempo_carga * (aviones_en_cola + 1))
+		print("Tiempo total de descongelamiento %d minutos" % (tiempo_carga)
+		return  (tiempo_carga)
