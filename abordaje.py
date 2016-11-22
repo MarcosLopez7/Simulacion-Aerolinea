@@ -29,6 +29,7 @@ class Abordaje:
 		if dis > 0 :
 			pasajeros_por_minuto -= 5
 		print("Tiempo total en abordaje %f minutos" %(len(pasajeros)/pasajeros_por_minuto))
+		return (len(pasajeros)/pasajeros_por_minuto)
 	def repostajeCombustible(self,vuelo):
 		print("Repostando vuelo %s "%(vuelo['id']))
 		generador = Congruencial(vuelo['id'])
@@ -56,6 +57,9 @@ class Abordaje:
 		elif rand <= 100   and rand >=90:
 			tiempo_carga = 10
 		print("Tiempo total de repostaje %d minutos" %(tiempo_carga*(aviones_en_cola+1)))
+		tiempo_repostaje = tiempo_carga*(aviones_en_cola+1)
+		return tiempo_repostaje
+
 	def servicioDeAeromozas(self,vuelo,num):
 		print("Sirviendo pasajeros del vuelo %s "%(vuelo['id']))
 		generador = Congruencial(vuelo['id'])
@@ -74,6 +78,7 @@ class Abordaje:
 				tiempo_de_servicio = 5
 			tiempo_de_servicio_t+= tiempo_de_servicio
 		print("Tiempo de servicio total %d" %(tiempo_de_servicio_t))
+		return tiempo_de_servicio_t
 
 	def descongelamiento(self, vuelo):
 		print("Repostando vuelo %s " % (vuelo['id']))
@@ -95,4 +100,6 @@ class Abordaje:
 			tiempo_carga = 50
 		elif rand <= 100 and rand >= 95:
 			tiempo_carga = 60
-		print("Tiempo total de repostaje %d minutos" % (tiempo_carga * (aviones_en_cola + 1)))
+
+		print("Tiempo total de descongelamiento %d minutos" % (tiempo_carga * (aviones_en_cola + 1)))
+		return  (tiempo_carga * (aviones_en_cola + 1))

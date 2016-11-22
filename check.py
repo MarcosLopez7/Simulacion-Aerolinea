@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from time import gmtime
 from abordaje import Abordaje
 from shuttle import Shuttle
+from despegue import Despegue
 class CheckIn:
 	def __init__(self):
 		pasajeros = 0
@@ -17,7 +18,7 @@ class CheckIn:
 			rand = generador.genera()%len(pasajeros)
 			if pasajeros[rand].equipaje > 25:
 				peso_excedente += pasajeros[rand].equipaje - 25
-		print("Se obtuvieron %d kilos, representan $%d" %(peso_excedente,peso_excedente*costo_pk_exc))
+		print("Dinero por sobrepeso (%d) Kg: $%d"%(peso_excedente,peso_excedente*costo_pk_exc))
 		
 	def colaCheckIn(self,pasajeros,vuelos,num_pasajeros):
 		generador = Congruencial(200)
@@ -111,13 +112,15 @@ class CheckIn:
 		self.sobrepeso(perdidos,pasajeros)
 		
 		print ("Atendidos a las 5 horas antes del vuelo: %d" %hora_4_t)
-		print ("Atendidos a las 4 %d" %(int(hora_5_t/num_pasajeros_iniciales)))
+		print ("Atendidos a las 4 %d" %hora_5_t)
 		print ("Atendidos a las 3 %d" %hora_6_t)
 		print ("Atendidos a las 2 %d" %hora_7_t)
 		print ("Atendidos a las 1 o menos: %d" %hora_may_8_t)
 
 	def makeCheckInMexico(self,pasajeros,vuelos):
 		shut = Shuttle()
+		abor = Abordaje()
+		des = Despegue()
 		print ("CheckIn de Mexico a Francia")
 		for j in range(44,60,2):#len(vuelos)):
 			num_pasajeros = 0
@@ -127,13 +130,31 @@ class CheckIn:
 					num_pasajeros += 1
 					pasajeros_en_vuelo.append(pasajeros[i])
 			#print(num_pasajeros)
-			print("Vuelo %d" %(j))
+			print("-----------------------------")
+			print("			Vuelo %d" %(j))
+			print("-----------------------------")
+			print("Fecha: %s"%vuelos[j]['fecha'])
+			print("Boletos comprados: %d"%num_pasajeros)
+			print("Tiempo de Check In: %d minutos"%checkin_total)
+			print("Tiempo de Repostaje de Combustible %d"%comb_total)
+			print("Tiempo de Descongelamiento: %d" %descon_total)
+			print("Tiempo de Abordaje: %d minutos"%abordaje_total)
+			print("Tiempo de Mantenimiento: %d minutos"%mantto_total)
+			print("Tiempo de espera a despegar: %d minutos"%tax_at_total)
+			print("Tiempo de Servicio: %d minutos"%serv_total)
+			print("Tiempo de Shuttle: %d minutos" %shuttle_total)
+
 			if num_pasajeros > 0:
-				self.colaCheckIn(pasajeros_en_vuelo,vuelos,num_pasajeros)
+				checkin_total = self.colaCheckIn(pasajeros_en_vuelo,vuelos,num_pasajeros)
 			else:
 				print ("Para la fecha %s no hay pasajeros" %(vuelos[j]['fecha']))
-			self.makeBoarding(pasajeros_en_vuelo,vuelos[j])	
-			shut.cargarShuttle(vuelos[j],pasajeros_en_vuelo)
+			comb_total = abor.repostajeCombustible(vuelos[j])
+			descon_total = abor.descongelamiento(vuelos[j])
+			abordaje_total = self.makeBoarding(pasajeros_en_vuelo,vuelos[j])
+			tax_at_total = 	des.taxing(vuelos[j])
+			serv_total = abor.servicioDeAeromozas(vuelos[j],pasajeros_en_vuelo)
+			shuttle_total = shut.cargarShuttle(vuelos[j],pasajeros_en_vuelo)
+
 
 	def makeCheckInFrancia(self,pasajeros,vuelos):
 		print ("CheckIn de Francia a Mexico")
