@@ -6,7 +6,6 @@ from avion import Avion
 from falla import Falla
 from generador import Congruencial
 
-
 class Aerolinea:
 
     dinero_ganado = 0
@@ -14,6 +13,7 @@ class Aerolinea:
     pasajeros = []
     vuelos = []
     aviones = []
+    temporada_alta = False
 
     def __init__(self):
         with open('data.json') as data_file:
@@ -49,6 +49,7 @@ class Aerolinea:
 
             if mes == '12' or mes == '08' or mes == '06' or mes == '07':
                 prob_solicitudes *= 4
+                temporada_alta = True
 
             random = (self.random.genera() % 100) + 1
 
@@ -119,10 +120,6 @@ class Aerolinea:
                 if 5 > rand_clima:
                     falla_francia.mal_clima = True
                     falla_francia.climatico()
-
-
-
-
 
 
 

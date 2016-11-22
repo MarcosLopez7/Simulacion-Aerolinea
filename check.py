@@ -1,8 +1,10 @@
 from avion import Avion
+from aerolinea import Aerolinea
 from pasajero import Pasajero
 from generador import Congruencial
 from datetime import datetime, timedelta
 from time import gmtime
+from abordaje import Abordaje
 class CheckIn:
 	def __init__(self):
 		pasajeros = 0
@@ -18,43 +20,29 @@ class CheckIn:
 		i = 0
 		pasajeros_por_atender = 0
 		num_pasajeros = 100
-		print("num_pasajeros en proceso %d"%num_pasajeros)
-		#while num_pasajeros > 0:
-		for j in range(0,10):
+		num_pasajeros_iniciales = num_pasajeros
+		#print("num_pasajeros en proceso %d"%num_pasajeros)
+		while num_pasajeros > 0:
 			hora_4 = 0 
 			hora_5 = 0
 			hora_6 = 0 
 			hora_7 = 0
 			atendidos = 0
 			hora_may_8 = 0
-			print("------------%d-----------------"%j)
-			print("Numero de pasajeros en cola %d" %num_pasajeros)
-			#numero de pasajeros
-			'''numero = (generador.genera() % 100)
-			if numero < 30 and numero >= 0:
-				pasajeros_por_atender = 1
-			elif numero < 45 and numero >= 30:
-				pasajeros_por_atender = 2
-			elif numero < 66 and numero >= 45:
-				pasajeros_por_atender = 3	
-			elif numero < 77 and numero >= 66:
-				pasajeros_por_atender = 4
-			elif numero < 90 and numero >= 77:
-				pasajeros_por_atender = 5
-			else:
-				pasajeros_por_atender = 6'''
-			#hora en que llegan entre 20 a 0
-			hora = int(datetime.strftime(datetime.now() + timedelta(hours=j), '%H'))
-			if hora > 20:
+			#print("------------%d-----------------"%i)
+			#print("Numero de pasajeros en cola %d" %num_pasajeros)
+			rand = int(datetime.strftime(datetime.now(), '%H'))
+			hora = generador.genera()*(rand*(i*2)) % 100
+			if hora < 20 and hora >= 0:
 				prob_solicitudes = 0.2
 				hora_4 = 1
-			elif hora > 21:
+			elif hora < 50 and hora >= 20:
 				prob_solicitudes = 0.3
 				hora_5 = 1
-			elif hora > 22:
+			elif hora < 85 and hora >=50:
 				prob_solicitudes = 0.35
 				hora_6 = 1
-			elif hora > 23:
+			elif hora < 95 and hora >= 85:
 				prob_solicitudes = 0.1
 				hora_7 = 1
 			else:
@@ -75,19 +63,25 @@ class CheckIn:
 			else:
 				tiempo_atencion = 1
 			#Tomando en cuenta la hora
-			print("Resultado de la probabilidad %d" %(int(num_pasajeros * prob_solicitudes)))
+			#print("Resultado de la probabilidad %d" %(int(num_pasajeros * prob_solicitudes)))
 			pasajeros_por_atender = (int(num_pasajeros * prob_solicitudes))
 			num_pasajeros -= pasajeros_por_atender
-			print("num_pasajeros despues de atender %d"%num_pasajeros)
-			#i+=1
+			#print("num_pasajeros despues de atender %d"%num_pasajeros)
+			i+=1
 			#Comparaciones
 			#200 usd por pasajero de perdida
-			print("Atendiendo %d en %d tiempo" %(pasajeros_por_atender,tiempo_atencion))
+			#print("Atendiendo %d en %d tiempo" %(pasajeros_por_atender,tiempo_atencion))
 			if atendidos < num_pasajeros:
-				atendidos += pasajeros_por_atender
+				if num_pasajeros > 0 and pasajeros_por_atender < 1:
+					#print("Entre en esto")
+					atendidos += num_pasajeros
+					num_pasajeros = 0
+				else:
+					atendidos += pasajeros_por_atender
 				tiempo_total += (pasajeros_por_atender*tiempo_atencion)
 			else:
-				print ("Faltaron de atender %d " %(num_pasajeros - (atendidos + pasajeros_por_atender)))
+				print("Algo salio mal")
+				#print ("Faltaron de atender %d " %(num_pasajeros - (atendidos + pasajeros_por_atender)))
 
 			if hora_4 == 1:
 				hora_4_t += atendidos
@@ -99,15 +93,20 @@ class CheckIn:
 				hora_7_t += atendidos
 			else:
 				hora_may_8_t+=atendidos
-		print ("El promedio de pasajeros es %d " %(atendidos/num_pasajeros))
+			#print("[%d] atendidos: %d" %(i,atendidos))
+			#print ("[%d]: El promedio de llegada pasajeros es %f " %(i,(atendidos/num_pasajeros_iniciales)))
+		#print ("Se atendieron %d pasajeros" %atendidos)
+		perdidos = int(num_pasajeros_iniciales*0.10)
+		print ("Se perdio el equipaje de %d pasajeros el costo es: %f" %(perdidos,perdidos*200)) #200 USD por cada pasajero
 		print ("El tiempo_total es %d" %tiempo_total)
-		print ("Se atendieron %d pasajeros" %atendidos)
 		
-		print ("Atendidos a las 4: %d" %hora_4_t)
-		print ("Atendidos a las 5: %d" %hora_5_t)
-		print ("Atendidos a las 6: %d" %hora_6_t)
-		print ("Atendidos a las 7: %d" %hora_7_t)
-		print ("Atendidos a las 8 o mas: %d" %hora_may_8_t)
+		
+		
+		print ("Atendidos a las 5 horas antes del vuelo: %d" %hora_4_t)
+		print ("Atendidos a las 4 %f" %(int(hora_5_t/num_pasajeros_iniciales)))
+		print ("Atendidos a las 3 %d" %hora_6_t)
+		print ("Atendidos a las 2 %d" %hora_7_t)
+		print ("Atendidos a las 1 o menos: %d" %hora_may_8_t)
 
 	def makeCheckInMexico(self,pasajeros,vuelos):
 		print ("CheckIn de Mexico a Francia")
@@ -117,19 +116,27 @@ class CheckIn:
 				if (pasajeros[i].vuelo_ida['fecha'] == vuelos[j]['fecha']):
 					num_pasajeros += 1
 			#print(num_pasajeros)
-			print("Vuelo %d num_pasajeros %d" %(j,num_pasajeros))
+			print("Vuelo %d" %(j))
 			if num_pasajeros > 0:
 				self.colaCheckIn(pasajeros,vuelos,num_pasajeros)
 			else:
 				print ("Para la fecha %s no hay pasajeros" %(vuelos[j]['fecha']))
-		
-		
-	
-    
+			self.makeBoarding(pasajeros,vuelos[j])
+	def makeCheckInFrancia(self,pasajeros,vuelos):
+		print ("CheckIn de Francia a Mexico")
+		for j in range(41,50,2):#len(vuelos)):
+			num_pasajeros = 0
+			for i in range(0,len(pasajeros)):
+				if (pasajeros[i].vuelo_ida['fecha'] == vuelos[j]['fecha']):
+					num_pasajeros += 1
+			#print(num_pasajeros)
+			print("Vuelo %d" %(j))
+			if num_pasajeros > 0:
+				self.colaCheckIn(pasajeros,vuelos,num_pasajeros)
+			else:
+				print ("Para la fecha %s no hay pasajeros" %(vuelos[j]['fecha']))
+	def makeBoarding(self,pasajeros,vuelo):
+		abordaje = Abordaje()
+		abordaje.abordar(pasajeros,vuelo)
 
-
-		#for i in range(1,len(pasajeros),2):
-		#	print ("El pasajero tiene el id %d" %(pasajeros[i].id))
-			#print ("El vuelo que tiene el pasajero %d es %s" %(pasajeros[i].id,pasajeros[i].vuelo_ida))
-			#print if vuelos[i]['fecha'] == datetime.strftime(datetime.now() + timedelta(days=vuelo_rand, hours=h),
-                                                        #   '%Y-%m-%d'):
+		
